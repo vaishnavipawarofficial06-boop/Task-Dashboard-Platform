@@ -1,0 +1,19 @@
+{
+  "name": "taskflow-dashboard",
+  "version": "1.0.0",
+  "description": "Interactive Dynamic Task Dashboard Platform with Express, SQLite, async CRUD, analytics and CSV export",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "sql.js": "^1.13.0"
+  },
+  "devDependencies": {}
+}
