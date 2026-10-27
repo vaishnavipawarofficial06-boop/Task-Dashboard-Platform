@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101827"><title>Taskflow — Dynamic Task Dashboard</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#"><span class="brand-mark">✳</span><span>taskflow<small>WORKSPACE</small></span></a>
+      <div class="side-label">WORKSPACE</div>
+      <button class="nav-item active" id="nav-dashboard"><span>▦</span> Overview</button>
+      <button class="nav-item" id="nav-all"><span>☷</span> All tasks <b id="side-total">0</b></button>
+      <div class="side-label space-top">FILTER BY STATUS</div>
+      <button class="nav-item status-nav" data-status="todo"><i class="dot todo-dot"></i> To do</button>
+      <button class="nav-item status-nav" data-status="in_progress"><i class="dot progress-dot"></i> In progress</button>
+      <button class="nav-item status-nav" data-status="completed"><i class="dot done-dot"></i> Completed</button>
+      <div class="sidebar-bottom"><div class="avatar">TF</div><div><strong>My workspace</strong><small>Personal project board</small></div><span class="online-dot"></span></div>
+    </aside>
+    <main class="main">
+      <header class="topbar"><div class="breadcrumb">Workspace <span>/</span> <strong id="crumb">Overview</strong></div><div class="top-actions"><span class="live"><i></i> API connected</span><button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">◐</button><div class="avatar">TF</div></div></header>
+      <section class="page-heading"><div><div class="eyebrow">TUESDAY, YOUR WORKSPACE</div><h1 id="page-title">Good work starts here<span> ✦</span></h1><p>Keep your projects moving. One task at a time.</p></div><button class="primary-btn" id="new-task"><span>＋</span> New task</button></section>
+      <section class="stats-grid">
+        <article class="stat-card"><div class="stat-top"><span>Total tasks</span><span class="stat-icon purple">▦</span></div><div class="stat-number" id="stat-total">0</div><div class="stat-foot">Across your workspace</div></article>
+        <article class="stat-card"><div class="stat-top"><span>To do</span><span class="stat-icon amber">◷</span></div><div class="stat-number" id="stat-todo">0</div><div class="stat-foot"><span class="mini-dot amber-bg"></span> Waiting to get started</div></article>
+        <article class="stat-card"><div class="stat-top"><span>In progress</span><span class="stat-icon blue">↗</span></div><div class="stat-number" id="stat-progress">0</div><div class="stat-foot"><span class="mini-dot blue-bg"></span> Work in motion</div></article>
+        <article class="stat-card"><div class="stat-top"><span>Completed</span><span class="stat-icon green">✓</span></div><div class="stat-number" id="stat-completed">0</div><div class="stat-foot"><span id="completion-rate">0%</span> completion rate</div></article>
+      </section>
+      <section class="content-card">
+        <div class="list-heading"><div><h2 id="list-title">Your tasks</h2><p>Manage priorities, deadlines and progress.</p></div><button class="secondary-btn" id="export-btn">↧ Export CSV</button></div>
+        <div class="toolbar"><label class="search-box"><span>⌕</span><input id="search" placeholder="Search tasks, descriptions, tags…" autocomplete="off"></label><select id="status-filter" aria-label="Filter status"><option value="all">All statuses</option><option value="todo">To do</option><option value="in_progress">In progress</option><option value="completed">Completed</option></select><select id="priority-filter" aria-label="Filter priority"><option value="all">All priorities</option><option value="urgent">Urgent</option><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select><select id="sort-filter" aria-label="Sort tasks"><option value="created_desc">Newest first</option><option value="created_asc">Oldest first</option><option value="due_asc">Due date</option><option value="priority">Priority</option></select></div>
+        <div class="task-table-wrap"><table><thead><tr><th>TASK</th><th>PRIORITY</th><th>DUE DATE</th><th>STATUS</th><th></th></tr></thead><tbody id="task-list"><tr><td colspan="5" class="loading">Loading tasks…</td></tr></tbody></table></div>
+        <div class="list-footer"><span id="result-count">Loading…</span><span>Saved automatically · SQLite</span></div>
+      </section>
+      <footer>Built for focused work <span>✦</span> <span id="api-status">Connecting to local API…</span></footer>
+    </main>
+  </div>
+  <dialog id="task-dialog"><form id="task-form"><div class="modal-head"><div><div class="eyebrow" id="modal-eyebrow">TASK DETAILS</div><h2 id="modal-title">Create a task</h2></div><button type="button" class="icon-btn" id="close-modal" aria-label="Close">✕</button></div><input type="hidden" id="task-id"><label>Task title <input id="title" maxlength="140" required placeholder="What needs to get done?"></label><label>Description <textarea id="description" rows="3" maxlength="2000" placeholder="Add a few details…"></textarea></label><div class="form-row"><label>Status<select id="status"><option value="todo">To do</option><option value="in_progress">In progress</option><option value="completed">Completed</option></select></label><label>Priority<select id="priority"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option><option value="urgent">Urgent</option></select></label></div><div class="form-row"><label>Due date<input id="due-date" type="date"></label><label>Tags<input id="tags" placeholder="design, research"></label></div><div class="modal-actions"><button type="button" class="secondary-btn" id="cancel-modal">Cancel</button><button type="submit" class="primary-btn" id="save-task">Save task</button></div></form></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="/app.js" defer></script>
+</body></html>
